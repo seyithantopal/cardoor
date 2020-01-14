@@ -1,0 +1,65 @@
+{% extends 'adminbase.html.twig' %}
+
+{% set name = 'User' %}
+{% block title %}{{ name }}{% endblock %}
+{% block nav %}User{% endblock %}
+{% block sub_nav %}{{ name }}{% endblock %}
+
+{% block body %}
+<div class="card">
+    <div class="card-header"><h1>{{ name }}</h1></div>
+    <div class="card-body">
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ user.id }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ user.name }}</td>
+            </tr>
+            <tr>
+                <th>Lastname</th>
+                <td>{{ user.lastname }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td><a href="mailto:{{ user.email }}" style="text-decoration: underline;">{{ user.email }}</a></td>
+            </tr>
+            <tr>
+                <th>Roles</th>
+                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
+            </tr>
+            <tr>
+                <th>Password</th>
+                <td>{{ user.password }}</td>
+            </tr>
+            <tr>
+                <th>Image</th>
+                <td><img src = "{{ asset('uploads/images/') ~ user.image }}" width="100" height="100"></td>
+            </tr>
+            <tr>
+                <th>Status</th>
+                <td>{{ user.status ? "<label class='badge badge-success'>True</label>" : "<label class='badge badge-danger'>False</label>" }}</td>
+            </tr>
+            <tr>
+                <th>Created_at</th>
+                <td>{{ user.createdAt ? user.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Updated_at</th>
+                <td>{{ user.updatedAt ? user.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('admin_user_index') }}"><button class="btn btn-dark"><i class="ik ik-arrow-left"></i>back to list</button></a>
+
+    <a href="{{ path('admin_user_edit', {'id': user.id}) }}"><button class="btn btn-dark"><i class="ik ik-edit-2"></i>edit</button></a><br><br>
+
+    {{ include('admin/user/_delete_form.html.twig') }}
+    </div>
+</div>
+{% endblock %}

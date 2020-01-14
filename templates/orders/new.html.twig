@@ -1,0 +1,103 @@
+{% extends 'homebase.html.twig' %}
+
+
+{% block title %}New Order | {{ setting.title }}{% endblock %}
+{% block description %}{{ setting.description }}{% endblock %}
+{% block keywords %}{{ setting.keywords }}{% endblock %}
+
+{% block body %}
+    <section id="page-title-area" class="section-padding overlay">
+        <div class="container">
+            <div class="row">
+                <!-- Page Title Start -->
+                <div class="col-lg-12">
+                    <div class="section-title  text-center">
+                        <h2>Order Index</h2>
+                        <span class="title-line"><i class="fa fa-car"></i></span>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                    </div>
+                </div>
+                <!-- Page Title End -->
+            </div>
+        </div>
+    </section>
+    <section id="lgoin-page-wrap" class="section-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 orders">
+                    <h1><b>User Info</b></h1>
+                    {{ form_start(form) }}
+                    <div class="row">
+                        <div class="col-lg-12">
+                            {{ form_label(form.amount) }}
+                            {{ form_widget(form.amount, {'value': totalPrice, 'attr': {'readonly': 'readonly'} }) }}
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            {{ form_label(form.name) }}
+                            {{ form_widget(form.name) }}
+                        </div>
+                        <div class="col-lg-6">
+                            {{ form_label(form.lastname) }}
+                            {{ form_widget(form.lastname) }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            {{ form_label(form.address) }}
+                            {{ form_widget(form.address) }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            {{ form_label(form.phone) }}
+                            {{ form_widget(form.phone) }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            {{ form_label(form.city) }}
+                            {{ form_widget(form.city) }}
+                        </div>
+                    </div>
+
+                    <h1><b>Credit Card Info</b></h1>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <label>Card Name</label>
+                           <input type="text" name="cardname" class="form-control">
+                        </div>
+                        <div class="col-lg-6">
+                            <label>CVV</label>
+                            <input type="text" name="cardcvv" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <label>Card Number</label>
+                            <input type="text" name="cardnumber" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <label>Expiration Date (MM/YY)</label>
+                            <input type="text" name="cardexpiration" class="form-control" pattern="([0-9]{2}[/][0-9]{2})">
+                        </div>
+                    </div>
+
+
+                    <br><button class="btn btn-dark">{{ button_label|default('Save') }}</button>
+                    {{ form_row(form._token) }}
+                    {{ form_end(form, {'render_rest': false}) }}
+
+
+
+
+                    <br><a href="{{ path('orders_index') }}"><button class="btn btn-dark"><i class="ik ik-arrow-left"></i>back to list</button></a>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

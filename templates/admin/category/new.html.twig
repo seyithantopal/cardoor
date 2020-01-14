@@ -1,0 +1,18 @@
+{% extends 'adminbase.html.twig' %}
+
+{% set name = 'Category New Category' %}
+{% block title %}{{ name }}{% endblock %}
+{% block nav %}Category{% endblock %}
+{% block sub_nav %}{{ name }}{% endblock %}
+
+{% block body %}
+        <div class="card">
+            <div class="card-header"><h1>{{ name }}</h1></div>
+            <div class="card-body">
+
+    {{ include('admin/category/_form.html.twig', {'button_label' : 'Submit' })  }}
+
+        <br><a href="{{ path('admin_category_index') }}"><button class="btn btn-dark"><i class="ik ik-arrow-left"></i>back to list</button></a>
+    </div>
+</div>
+{% endblock %}

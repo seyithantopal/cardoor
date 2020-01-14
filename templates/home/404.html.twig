@@ -1,0 +1,30 @@
+{% if flag is defined %}
+    {% include('home/head.html.twig') %}
+{% endif %}
+<!--== 404 Page Page Content Start ==-->
+<section id="page-404-wrap" class="section-padding overlay" style="height:100%">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="page-404-content">
+                    <div class="number">
+                        <div class="four">4</div>
+                        <div class="zero">
+                            <img src="{{ asset('assets') }}/cardoor/assets/img/404.png" alt="JSOFT">
+                        </div>
+                        <div class="four">4</div>
+                    </div>
+                    <h4>{{ msg }}</h4>
+                    <p>{{ sub_msg | raw }}</p>
+                    <!--<a href="/" class="btn-404-home"><i class="fa fa-home"></i>Home</a>-->
+                    <div class="col-lg-12">
+                        <a href="index2.html" class="logo">
+                            <img src="{{ asset('assets') }}/cardoor/assets/img/logo.png" style="margin-top:20px;width:300px;">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--== 404 Page Page Content End ==-->

@@ -1,0 +1,98 @@
+{% extends 'adminbase.html.twig' %}
+
+{% set name = 'Setting' %}
+{% block title %}{{ name }}{% endblock %}
+{% block description %}{{ setting.description }}{% endblock %}
+{% block keywords %}{{ setting.keywords }}{% endblock %}
+{% block nav %}Setting{% endblock %}
+{% block sub_nav %}{{ name }}{% endblock %}
+
+{% block body %}
+<div class="card">
+    <div class="card-header"><h1>{{ name }}</h1></div>
+    <div class="card-body">
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ setting.id }}</td>
+            </tr>
+            <tr>
+                <th>Title</th>
+                <td>{{ setting.title }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ setting.description }}</td>
+            </tr>
+            <tr>
+                <th>Keywords</th>
+                <td>{{ setting.keywords }}</td>
+            </tr>
+            <tr>
+                <th>Company</th>
+                <td>{{ setting.company }}</td>
+            </tr>
+            <tr>
+                <th>Address</th>
+                <td>{{ setting.address }}</td>
+            </tr>
+            <tr>
+                <th>Phone</th>
+                <td>{{ setting.phone }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ setting.email }}</td>
+            </tr>
+            <tr>
+                <th>Smtpserver</th>
+                <td>{{ setting.smtpserver }}</td>
+            </tr>
+            <tr>
+                <th>Smtpemail</th>
+                <td>{{ setting.smtpemail }}</td>
+            </tr>
+            <tr>
+                <th>Smtppassword</th>
+                <td>{{ setting.smtppassword }}</td>
+            </tr>
+            <tr>
+                <th>Smtpport</th>
+                <td>{{ setting.smtpport }}</td>
+            </tr>
+            <tr>
+                <th>Facebook</th>
+                <td>{{ setting.facebook }}</td>
+            </tr>
+            <tr>
+                <th>Instagram</th>
+                <td>{{ setting.instagram }}</td>
+            </tr>
+            <tr>
+                <th>Twitter</th>
+                <td>{{ setting.twitter }}</td>
+            </tr>
+            <tr>
+                <th>Aboutus</th>
+                <td>{{ setting.aboutus | raw }}</td>
+            </tr>
+            <tr>
+                <th>Contact</th>
+                <td>{{ setting.contact | raw }}</td>
+            </tr>
+            <tr>
+                <th>Status</th>
+                <td>{{ setting.status ? "<label class='badge badge-success'>True</label>" : "<label class='badge badge-danger'>False</label>" }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <a href="{{ path('admin_setting_index') }}"><button class="btn btn-dark"><i class="ik ik-arrow-left"></i>back to list</button></a>
+
+        <a href="{{ path('admin_setting_edit', {'id': setting.id}) }}"><button class="btn btn-dark"><i class="ik ik-edit-2"></i>edit</button></a><br><br>
+
+    {{ include('admin/setting/_delete_form.html.twig') }}
+    </div>
+</div>
+{% endblock %}

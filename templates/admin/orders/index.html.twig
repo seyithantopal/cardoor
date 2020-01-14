@@ -1,0 +1,54 @@
+{% extends 'adminbase.html.twig' %}
+
+{% set name = 'Orders Index' %}
+{% block title %}{{ name }}{% endblock %}
+{% block description %}{{ setting.description }}{% endblock %}
+{% block keywords %}{{ setting.keywords }}{% endblock %}
+{% block nav %}Orders{% endblock %}
+{% block sub_nav %}{{ name }}{% endblock %}
+
+{% block body %}
+    <div class="card">
+        <div class="card-header"><h1>{{ name }}</h1></div>
+        <div class="card-body">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>User</th>
+                    <th>Amount</th>
+                    <th>Name</th>
+                    <th>Address</th>
+                    <th>Phone</th>
+                    <th>City</th>
+                    <th>Status</th>
+                    <th>actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for order in orders %}
+                    <tr>
+                        <td>{{ order.id }}</td>
+                        <td><a href="/user/{{ order.userid }}" style="" onMouseOver="this.style.color='maroon'" onMouseOut="this.style.color='#000'">{{ order.name }} {{ order.lastname }}</a></td>
+                        <td>${{ order.amount }}</td>
+                        <td>{{ order.name }} {{ order.lastname }}</td>
+                        <td>{{ order.address }}</td>
+                        <td>{{ order.phone }}</td>
+                        <td>{{ order.city }}</td>
+                        <td><label class='badge badge-success'>{{ order.status }}</label></td>
+                        <td>
+                            <div class="table-actions" style="text-align:left;">
+                                <a href="{{ path('admin_orders_show', {'id': order.id}) }}"><i class="ik ik-eye text-blue"></i></a>
+                            </div>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="7">no records found</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends 'adminbase.html.twig' %}
+
+{% set name = 'User New Category' %}
+{% block title %}{{ name }}{% endblock %}
+{% block nav %}User{% endblock %}
+{% block sub_nav %}{{ name }}{% endblock %}
+
+{% block body %}
+<div class="card">
+    <div class="card-header"><h1>{{ name }}</h1></div>
+    <div class="card-body">
+
+    {{ include('admin/user/_form.html.twig') }}
+
+
+        <br><a href="{{ path('admin_user_index') }}"><button class="btn btn-dark"><i class="ik ik-arrow-left"></i>back to list</button></a>
+    </div>
+</div>
+{% endblock %}

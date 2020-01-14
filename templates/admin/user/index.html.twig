@@ -1,0 +1,55 @@
+{% extends 'adminbase.html.twig' %}
+
+{% set name = 'User Index' %}
+{% block title %}{{ name }}{% endblock %}
+
+{% block nav %}User{% endblock %}
+{% block sub_nav %}{{ name }}{% endblock %}
+
+{% block body %}
+<div class="card">
+    <div class="card-header"><h1>{{ name }}</h1></div>
+    <div class="card-body">
+        <a href="{{ path('admin_user_new') }}"><button class="btn btn-info"><i class="ik ik-share"></i>Create new</button></a><br><br>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Email</th>
+                <th>Roles</th>
+                <th>Name</th>
+                <th>Lastname</th>
+                <th>Image</th>
+                <th>Status</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
+                <td>{{ user.name }}</td>
+                <td>{{ user.lastname }}</td>
+                <td><img src = "{{ asset('uploads/images/') ~ user.image }}" width="150" height="100"></td>
+                <td>{{ user.status ? "<label class='badge badge-success'>True</label>" : "<label class='badge badge-danger'>False</label>" }}</td>
+                <td>
+                    <div class="table-actions" style="text-align:left;">
+                        <a href="{{ path('admin_user_show', {'id': user.id}) }}"><i class="ik ik-eye text-blue"></i></a>
+                        <a href="{{ path('admin_user_edit', {'id': user.id}) }}"><i class="ik ik-edit-2 text-green"></i></a>
+
+                        <a>{{ include('admin/user/_delete_form.html.twig', {'style': 'ik ik-edit f-16 mr-15 text-green'}) }}</a>
+                    </div>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="11">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    </div>
+</div>
+{% endblock %}

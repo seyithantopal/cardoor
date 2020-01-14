@@ -1,0 +1,79 @@
+{% extends 'homebase.html.twig' %}
+
+
+{% block title %}Cart | {{ setting.title }}{% endblock %}
+{% block description %}{{ setting.description }}{% endblock %}
+{% block keywords %}{{ setting.keywords }}{% endblock %}
+
+{% block body %}
+    <section id="page-title-area" class="section-padding overlay">
+        <div class="container">
+            <div class="row">
+                <!-- Page Title Start -->
+                <div class="col-lg-12">
+                    <div class="section-title  text-center">
+                        <h2>Cart</h2>
+                        <span class="title-line"><i class="fa fa-car"></i></span>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                    </div>
+                </div>
+                <!-- Page Title End -->
+            </div>
+        </div>
+    </section>
+    <section id="lgoin-page-wrap" class="section-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Car Title</th>
+                            <th>Car Image</th>
+                            <th>Pickupdate</th>
+                            <th>Returndate</th>
+                            <th>Total Days</th>
+                            <th>Total</th>
+                            <th>Status</th>
+                            <th>actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% set total = 0 %}
+                        {% for cart in carts %}
+                            <tr>
+                                <td>{{ cart.id }}</td>
+                                <td><a href="/car-detail/{{ cart.carid }}" style="" onMouseOver="this.style.color='maroon'" onMouseOut="this.style.color='#000'">{{ cart.title }}</a></td>
+                                <td><img src = "{{ asset('uploads/images/') ~ cart.image }}" width="150" height="100"></td>
+                                <td>{{ cart.pickupdate ? cart.pickupdate|date('m/d/Y') : '' }}</td>
+                                <td>{{ cart.returndate ? cart.returndate|date('m/d/Y') : '' }}</td>
+
+                                {% set difference = date(cart.returndate).diff(date(cart.pickupdate)) %}
+                                {% set leftDays = difference.days %}
+
+                                {% set total = total + ( cart.price * leftDays ) %}
+
+                                <td>{{ leftDays }} days</td>
+                                <td>${{ cart.price * leftDays }}</td>
+                                <td>{{ cart.status ? "<label class='badge badge-success'>True</label>" : "<label class='badge badge-danger'>False</label>" }}</td>
+                                <td>
+                                    <div class="table-actions" style="text-align:left;">
+                                        <a>{{ include('cart/_delete_form.html.twig', {'style': 'ik ik-edit f-16 mr-15 text-green'}) }}</a>
+                                    </div>
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="9">no records found</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    <h6><b>Total Price: ${{ total }}</b></h6>
+                    <a href="{{ path('orders_new') }}"><button class="btn btn-info"><i class="ik ik-share"></i>Proceed Checout</button></a><br><br>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

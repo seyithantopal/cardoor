@@ -1,0 +1,48 @@
+{% extends 'adminbase.html.twig' %}
+
+{% set name = 'Faq Index' %}
+{% block title %}{{ name }}{% endblock %}
+{% block nav %}Faq{% endblock %}
+{% block sub_nav %}{{ name }}{% endblock %}
+
+{% block body %}
+<div class="card">
+    <div class="card-header"><h1>{{ name }}</h1></div>
+    <div class="card-body">
+        <a href="{{ path('admin_faq_new') }}"><button class="btn btn-info"><i class="ik ik-share"></i>Create new</button></a><br><br>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Question</th>
+                <th>Answer</th>
+                <th>Status</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for faq in faqs %}
+            <tr>
+                <td>{{ faq.id }}</td>
+                <td>{{ faq.question }}</td>
+                <td>{{ faq.answer | striptags | slice(0, 100) }}</td>
+                <td>{{ faq.status ? "<label class='badge badge-success'>True</label>" : "<label class='badge badge-danger'>False</label>" }}</td>
+                <td>
+                    <div class="table-actions" style="text-align:left;">
+                        <a href="{{ path('admin_faq_show', {'id': faq.id}) }}"><i class="ik ik-eye text-blue"></i></a>
+                        <a href="{{ path('admin_faq_edit', {'id': faq.id}) }}"><i class="ik ik-edit-2 text-green"></i></a>
+                        <a>{{ include('admin/faq/_delete_form.html.twig', {'style': 'ik ik-edit f-16 mr-15 text-green'}) }}</a>
+                    </div>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    </div>
+</div>
+{% endblock %}

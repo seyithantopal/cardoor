@@ -1,0 +1,45 @@
+<!--== Header Area Start ==-->
+    <header id="header-area" class="fixed-top">
+        <!--== Header Bottom Start ==-->
+        <div id="header-bottom">
+            <div class="container">
+                <div class="row">
+                    <!--== Logo Start ==-->
+                    <div class="col-lg-4">
+                        <a href="/" class="logo">
+                            <img src="{{ asset('assets') }}/cardoor/assets/img/logo.png" alt="JSOFT">
+                        </a>
+                    </div>
+                    <!--== Logo End ==-->
+
+                    <!--== Main Menu Start ==-->
+                    <div class="col-lg-8 d-none d-xl-block">
+                        <nav class="mainmenu alignright">
+                            <ul>
+                                <li class="active"><a href="/">Home</a></li>
+                                <li><a href="/about-us">About</a></li>
+                                <li><a href="/user/cars">Cars</a></li>
+                                <li><a href="/contact">Contact</a></li>
+                                <li><a href="/faq">FAQ</a></li>
+                                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                                    <li><img src="{{ asset('uploads/images/') ~ app.user.image }}" style="width:30px; height:30px;border-radius:50%; margin-top:10px; margin-left:20px; cursor:pointer;">
+                                        <ul>
+                                            <li><a href="/user">Profile</a></li>
+                                            <li><a href="/user/cart">Cart</a></li>
+                                            <li><a href="/user/orders">Books</a></li>
+                                            <li><a href="/logout">Logout</a></li>
+                                        </ul>
+                                    </li>
+                                {% else %}
+                                    <li><a href="/loginuser">Login</a></li>
+                                    <li><a href="/register">Register</a></li>
+                                {% endif %}
+                            </ul>
+                        </nav>
+                    </div>
+                    <!--== Main Menu End ==-->
+                </div>
+            </div>
+        </div>
+        <!--== Header Bottom End ==-->
+    </header>

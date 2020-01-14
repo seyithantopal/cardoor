@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    <meta name="description" content="{% block description %}{% endblock%}">
+    <meta name="keywords" content="{% block keywords %}{% endblock%}">
+    {% block head %}{% include('home/head.html.twig') %}{% include('admin/head.html.twig') %}{% endblock %}
+</head>
+<body>
+{% if setting.status == 1 %}
+{% block header %}{% include('home/header.html.twig') %}{% endblock %}
+{% block slider %}{% include('home/slider.html.twig') %}{% endblock %}
+{% block body %}{% endblock %}
+{% block footer %}{% include('home/footer.html.twig') %}{% endblock %}
+{% block javascripts %}{% include('home/javascripts.html.twig') %}{% include('admin/javascripts.html.twig') %}{% endblock %}
+{% else %}
+    {{ include('home/404.html.twig', {'msg': 'UNDER CONSTRUCTION', 'sub_msg': 'WEBSITE IS UNDER CONSTRUCTION. WE ARE<p>ABOUT TO GO ONLINE SOON. FOLLOW US'}) }}
+{% endif %}
+
+</body>
+</html>

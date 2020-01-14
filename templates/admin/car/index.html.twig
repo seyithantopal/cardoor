@@ -1,0 +1,58 @@
+{% extends 'adminbase.html.twig' %}
+
+{% set name = 'Car Index' %}
+{% block title %}{{ name }}{% endblock %}
+{% block nav %}Car{% endblock %}
+{% block sub_nav %}{{ name }}{% endblock %}
+
+{% block body %}
+<div class="card">
+    <div class="card-header"><h1>{{ name }}</h1></div>
+    <div class="card-body">
+        <a href="{{ path('admin_car_new') }}"><button class="btn btn-info"><i class="ik ik-share"></i>Create new</button></a><br><br>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Keywords</th>
+                <th>Image</th>
+
+                <th>Status</th>
+
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for car in cars %}
+            <tr>
+                <td>{{ car.id }}</td>
+                <td>{{ car.title }}</td>
+                <td>{{ car.description }}</td>
+                <td>{{ car.keywords }}</td>
+                <td><a href="/admin/image/{{ car.id }}"><img src = "{{ asset('uploads/images/') ~ car.image }}" width="150" height="100"></a></td>
+
+                <td>{{ car.status ? "<label class='badge badge-success'>True</label>" : "<label class='badge badge-danger'>False</label>" }}</td>
+
+                <td>
+                    <div class="table-actions" style="text-align:left;">
+                        <a href="{{ path('admin_car_show', {'id': car.id}) }}"><i class="ik ik-eye text-blue"></i></a>
+                        <a href="{{ path('admin_car_edit', {'id': car.id}) }}"><i class="ik ik-edit-2 text-green"></i></a>
+
+                        <a>{{ include('admin/car/_delete_form.html.twig', {'style': 'ik ik-edit f-16 mr-15 text-green'}) }}</a>
+
+                    </div>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="22">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    </div>
+</div>
+{% endblock %}

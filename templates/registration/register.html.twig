@@ -1,0 +1,95 @@
+<html>
+<head>
+    <title>Register | {{ setting.title }}</title>
+
+    <meta name="description" content="{{ setting.description }}">
+    <meta name="keywords" content="{{ setting.keywords }}">
+    <link rel="icon" href="{{ asset('assets') }}/admin/favicon.ico" type="image/x-icon" />
+    {% include('admin/head.html.twig') %}
+    <style>
+        .auth-wrapper .authentication-form .logo-centered {
+            margin-bottom: 0px;
+            margin-top: -40px;
+        }
+        .form-group .form-check {
+            padding-left: 0;
+        }
+        .auth-wrapper .authentication-form .form-group .form-control {
+            padding-left: 10px;
+        }
+
+        .auth-wrapper .authentication-form {
+            padding: 0px;
+            margin-top:-10px;
+        }
+    </style>
+</head>
+<body>
+<div class="auth-wrapper">
+    <div class="container-fluid h-100">
+        <div class="row flex-row h-100 bg-white">
+            <div class="col-xl-8 col-lg-6 col-md-5 p-0 d-md-block d-lg-block d-sm-none d-none">
+                <div class="lavalite-bg" style="background-image: url('{{ asset('assets') }}/admin/img/auth/register-bg.jpg')">
+                    <div class="lavalite-overlay"></div>
+                </div>
+            </div>
+            <div class="col-xl-4 col-lg-6 col-md-7 my-auto p-0">
+                <div class="authentication-form mx-auto">
+                    <div class="logo-centered">
+                        <a href="../index.html"><img src="{{ asset('assets') }}/admin/src/img/brand.svg" alt=""></a>
+                    </div>
+
+                    {{ form_start(registrationForm) }}
+                    <div class="form-group" style="display:none;">
+                        {{ form_row(registrationForm.roles) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_row(registrationForm.name) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_row(registrationForm.lastname) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_row(registrationForm.email) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_row(registrationForm.password) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_row(registrationForm.image) }}
+                    </div>
+
+                    <button class="btn btn-theme">Register</button>
+                    {{ form_row(registrationForm._token) }}
+                    {{ form_end(registrationForm, {'render_rest': false}) }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% include('admin/javascripts.html.twig') %}
+<script>
+    "use strict";
+    $(document).ready(function() {
+        $(".form-check span").hide();
+        var elemsingle = document.querySelector('.js-single');
+        var switchery = new Switchery(elemsingle, {
+                color: '#2ed8b6',
+                secondaryColor: '#ff5370',
+                jackColor: '#fff'
+        });
+        /*var neighborhoodSelect = $("#car_fuel");
+
+        // Remove current options
+        //neighborhoodSelect.html('');
+
+        // Empty value ...
+        neighborhoodSelect.append(
+                '<option value="Electric">Electric</option>' +
+                '<option value="Diesel">Diesel</option>' +
+                '<option value="Hybrid">Hybrid</option>' +
+                '<option value="Natural Gas">Natural Gas</option>');*/
+    });
+</script>
+</body>
+</html>

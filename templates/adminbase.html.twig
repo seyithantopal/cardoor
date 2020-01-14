@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link rel="icon" href="{{ asset('assets') }}/admin/favicon.ico" type="image/x-icon" />
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    <meta name="description" content="{% block description %}{% endblock%}">
+    <meta name="keywords" content="{% block keywords %}{% endblock%}">
+    {% block head %}{% include('admin/head.html.twig') %}{% endblock %}
+</head>
+<body>
+{% block header %}{% include('admin/header.html.twig') %}{% endblock %}
+{% block sidebar %}{% include('admin/sidebar.html.twig') %}{% endblock %}
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="page-header">
+            <div class="row align-items-end">
+                <div class="col-lg-8">
+
+                </div>
+                <div class="col-lg-4">
+                    <nav class="breadcrumb-container" aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item">
+                                <a href="/admin"><i class="ik ik-home"></i></a>
+                            </li>
+
+                            <li class="breadcrumb-item"><a href="/admin/{{ block('nav')|lower }}">{% block nav %}{% endblock %}</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">{% block sub_nav %}{% endblock %}</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        {% block body %}{% endblock %}
+    </div>
+</div>
+
+{% block footer %}{% include('admin/footer.html.twig') %}{% endblock %}
+{% block javascripts %}{% include('admin/javascripts.html.twig') %}{% endblock %}
+</body>
+</html>

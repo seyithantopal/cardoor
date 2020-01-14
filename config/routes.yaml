@@ -1,0 +1,12 @@
+#index:
+#    path: /
+#    controller: App\Controller\DefaultController::index
+
+
+admin:
+    path: /admin
+    controller: App\Controller\Admin\AdminController::index
+
+login:
+    path: /login
+    controller: App\Controller\SecurityController::admin

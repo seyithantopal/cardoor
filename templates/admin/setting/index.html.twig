@@ -1,0 +1,65 @@
+{% extends 'adminbase.html.twig' %}
+
+{% set name = 'Setting Index' %}
+{% block title %}{{ name }}{% endblock %}
+{% block description %}{{ settings[0].description }}{% endblock %}
+{% block keywords %}{{ settings[0].keywords }}{% endblock %}
+{% block nav %}Setting{% endblock %}
+{% block sub_nav %}{{ name }}{% endblock %}
+
+{% block body %}
+<div class="card">
+    <div class="card-header"><h1>{{ name }}</h1></div>
+    <div class="card-body">
+
+
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Keywords</th>
+                <th>Company</th>
+                <th>Address</th>
+                <th>Phone</th>
+                <th>Email</th>
+                <th>Aboutus</th>
+                <th>Status</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for setting in settings %}
+            <tr>
+                <td>{{ setting.id }}</td>
+                <td>{{ setting.title }}</td>
+                <td>{{ setting.description }}</td>
+                <td>{{ setting.keywords }}</td>
+                <td>{{ setting.company }}</td>
+                <td>{{ setting.address }}</td>
+                <td>{{ setting.phone }}</td>
+                <td>{{ setting.email }}</td>
+                <td>{{ setting.aboutus | raw }}</td>
+                <td>{{ setting.status ? "<label class='badge badge-success'>True</label>" : "<label class='badge badge-danger'>False</label>" }}</td>
+                <td>
+                    <div class="table-actions" style="text-align:left;">
+                        <a href="{{ path('admin_setting_show', {'id': setting.id}) }}"><i class="ik ik-eye text-blue"></i></a>
+                        <a href="{{ path('admin_setting_edit', {'id': setting.id}) }}"><i class="ik ik-edit-2 text-green"></i></a>
+
+                        <a>{{ include('admin/setting/_delete_form.html.twig', {'style': 'ik ik-edit f-16 mr-15 text-green'}) }}</a>
+                    </div>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="18">no records found</td>
+                <a href="{{ path('admin_setting_new') }}"><button class="btn btn-info"><i class="ik ik-share"></i>Create new</button></a><br><br>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    </div>
+</div>
+{% endblock %}

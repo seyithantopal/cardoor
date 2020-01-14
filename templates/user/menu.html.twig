@@ -1,0 +1,52 @@
+ <div class="single-sidebar">
+    <h3>Menu</h3>
+     {% if flag == 1 %}
+    <img src="{{ asset('uploads/images/') ~ app.user.image }}" style="width:100%; height: 300px; padding:20px 20px 0 20px;border-radius:50px;">
+    <div class="sidebar-body">
+
+        <ul class="recent-tips">
+            <li class="single-recent-tips">
+                <div class="recent-tip-body">
+                    <h4><i class="fa fa-arrow-right"></i><a href="/user">My Profile</a></h4>
+                </div>
+            </li><hr>
+            <li class="single-recent-tips">
+                <div class="recent-tip-body">
+                    <h4><i class="fa fa-arrow-right"></i><a href="/user/cars">My Cars</a></h4>
+                </div>
+            </li><hr>
+            <li class="single-recent-tips">
+                <div class="recent-tip-body">
+                    <h4><i class="fa fa-arrow-right"></i><a href="/user/cart">My Cart</a></h4>
+                </div>
+            </li><hr>
+            <li class="single-recent-tips">
+                <div class="recent-tip-body">
+                    <h4><i class="fa fa-arrow-right"></i><a href="/user/orders">My Books</a></h4>
+                </div>
+            </li><hr>
+            <li class="single-recent-tips">
+                <div class="recent-tip-body">
+                    <h4><i class="fa fa-arrow-right"></i><a href="/logout">Logout</a></h4>
+                </div>
+            </li>
+        </ul>
+    </div>
+        {% else %}
+     <img src="{{ asset('uploads/images/') ~ user.image }}" style="width:100%; height: 300px; padding:20px 20px 0 20px;border-radius:50px;">
+     <div class="sidebar-body">
+            <ul class="recent-tips">
+                <li class="single-recent-tips">
+                    <div class="recent-tip-body">
+                        <h4><i class="fa fa-arrow-right"></i><a href="/user/{{ user.id }}">{{ user.name }}'s Profile</a></h4>
+                    </div>
+                </li><hr>
+                <li class="single-recent-tips">
+                    <div class="recent-tip-body">
+                        <h4><i class="fa fa-arrow-right"></i><a href="/user/{{ user.id }}/cars">{{ user.name }}'s Cars</a></h4>
+                    </div>
+                </li>
+            </ul>
+    </div>
+     {% endif %}
+</div>

@@ -1,0 +1,49 @@
+{% extends 'adminbase.html.twig' %}
+
+{% set name = 'Faq' %}
+{% block title %}{{ name }}{% endblock %}
+{% block nav %}Faq{% endblock %}
+{% block sub_nav %}{{ name }}{% endblock %}
+
+{% block body %}
+<div class="card">
+    <div class="card-header"><h1>{{ name }}</h1></div>
+    <div class="card-body">
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ faq.id }}</td>
+            </tr>
+            <tr>
+                <th>Question</th>
+                <td>{{ faq.question }}</td>
+            </tr>
+            <tr>
+                <th>Answer</th>
+                <td>{{ faq.answer }}</td>
+            </tr>
+            <tr>
+                <th>Status</th>
+                <td>{{ faq.status ? "<label class='badge badge-success'>True</label>" : "<label class='badge badge-danger'>False</label>" }}</td>
+            </tr>
+            <tr>
+                <th>Created_at</th>
+                <td>{{ faq.createdAt ? faq.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Updated_at</th>
+                <td>{{ faq.updatedAt ? faq.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <a href="{{ path('admin_faq_index') }}"><button class="btn btn-dark"><i class="ik ik-arrow-left"></i>back to list</button></a>
+
+        <a href="{{ path('admin_faq_edit', {'id': faq.id}) }}"><button class="btn btn-dark"><i class="ik ik-edit-2"></i>edit</button></a><br><br>
+
+
+        {{ include('admin/faq/_delete_form.html.twig') }}
+    </div>
+</div>
+{% endblock %}

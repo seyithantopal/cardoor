@@ -1,0 +1,211 @@
+{% extends 'homebase.html.twig' %}
+
+
+{% block title %}Details | {{ car.title }}{% endblock %}
+{% block description %}{{ car.description }}{% endblock %}
+{% block keywords %}{{ car.keywords }}{% endblock %}
+
+{% block body %}
+    <section id="page-title-area" class="section-padding overlay">
+        <div class="container">
+            <div class="row">
+                <!-- Page Title Start -->
+                <div class="col-lg-12">
+                    <div class="section-title  text-center">
+                        <h2>{{ car.title }}</h2>
+                        <span class="title-line"><i class="fa fa-car"></i></span>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                    </div>
+                </div>
+                <!-- Page Title End -->
+            </div>
+        </div>
+    </section>
+    <section id="lgoin-page-wrap" class="section-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="car-details-content">
+                        <h2>{{ car.title }}<span class="price">Rent: <b>${{ car.price }}</b></span></h2>
+                        <p class="added"><i>ADDED BY:</i> <a href="/user/{{ user.id }}">{{ user.name | upper }} {{ user.lastname | upper }}</a></p>
+                        <div class="car-preview-crousel">
+                            <div class="single-car-preview">
+                                {% if car.image is null %}
+                                    <img src="{{ asset('assets') }}/cardoor/assets/img/logo2.png">
+                                {% else %}
+                                    <img src="{{ asset('uploads/images/') ~ car.image }}">
+                                {% endif %}
+                            </div>
+                            {% if images is empty %}
+                                <div class="single-car-preview">
+                                    <img src="{{ asset('assets') }}/cardoor/assets/img/logo2.png">
+                                </div>
+                            {% else %}
+                                {% for image in images %}
+                                <div class="single-car-preview">
+                                    <img src="{{ asset('uploads/images/') ~ image.image }}" alt="JSOFT">
+                                </div>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                        </div>
+                        <div class="car-details-info">
+                            <h4><b>Additional Info</b></h4>
+                            <p>{{ car.detail | raw }}</p>
+
+                            <div class="technical-info">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="tech-info-table">
+                                            <table class="table table-bordered">
+                                                <tr>
+                                                    <th>Category</th>
+                                                    <td>{{ category.title }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Fuel</th>
+                                                    <td>{{ car.fuel }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Doors</th>
+                                                    <td>{{ car.doors }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>GearBox</th>
+                                                    <td>{{ car.gearbox }}</td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-6">
+                                        <div class="tech-info-list">
+                                            <ul>
+                                                {% if car.abs == 1 %}
+                                                    <li>ABS</li>
+                                                {% endif %}
+                                                {% if car.airbag == 1 %}
+                                                    <li>Air Bags</li>
+                                                {% endif %}
+                                                {% if car.bluetooth == 1 %}
+                                                    <li>Bluetooth</li>
+                                                {% endif %}
+                                                {% if car.carkit == 1 %}
+                                                    <li>Car Kit</li>
+                                                {% endif %}
+                                                {% if car.gps == 1 %}
+                                                    <li>GPS</li>
+                                                {% endif %}
+                                                {% if car.remoteStart == 1 %}
+                                                    <li>Remote Start</li>
+                                                {% endif %}
+                                                {% if car.parkingCameras == 1 %}
+                                                    <li>Parking Cameras</li>
+                                                {% endif %}
+                                                {% if car.music == 1 %}
+                                                    <li>Music</li>
+                                                {% endif %}
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <section id="page-title-area" class="section-padding overlay" style="margin-top: 20px; padding-top: 50px;">
+                                <div class="container">
+                                    <div class="row">
+                                        <!-- Page Title Start -->
+                                        <div class="col-lg-12">
+                                            <div class="section-title  text-center">
+                                                <h2>BOOKING</h2>
+                                                <span class="title-line"><i class="fa fa-car"></i></span>
+                                                <div class="book-ur-car" style="margin: 0; margin-top: 20px; margin-left: 250px; padding: 10px; background-color: transparent;">
+                                                {{ form_start(cartForm, {'action': path('cart_new', { 'car_id': car.id })}) }}
+
+                                                <div class="pick-date bookinput-item" style="border: 2px solid #fff;">
+                                                    {{ form_widget(cartForm.pickupdate) }}
+                                                </div>
+                                                <div class="return-date bookinput-item" style="border: 2px solid #fff;">
+                                                    {{ form_widget(cartForm.returndate) }}
+                                                </div>
+                                                <div class="bookcar-btn bookinput-item">
+                                                    <button class="">{{ button_label|default('Book Car') }}</button>
+                                                </div>
+
+                                                {{ form_end(cartForm) }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Page Title End -->
+                                    </div>
+                                </div>
+                            </section>
+
+
+
+
+
+                            {% for comment in comments %}
+                            <div class="comment-area">
+                                <div class="row">
+                                    <div class="col-lg-1">
+                                        <div class="comment-logo">
+                                            <img src="{{ asset('uploads/images/') ~ comment.image }}" alt="JSOFT">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-10">
+                                        <p class="name"><a href="/user/{{ comment.id }}">{{ comment.name }} {{ comment.lastname }}</a></p>
+                                        <p class="date">{{ comment.created_at|date('F d, Y') }}</p>
+                                        <p class="rate">{% for i in 1..5 %}
+                                        {% if i <= comment.rate %}
+                                            <i class="fa fa-star" style="color:#ffd000;font-size: 20px;"></i>
+                                        {% else %}
+                                            <i class="fa fa-star unmark" style="color:#ddd;font-size:20px;"></i>
+                                        {% endif %}
+                                    {% endfor %}
+                                        </p>
+                                        <p class="comment">{{ comment.comment }}</p>
+                                    </div>
+                                </div>
+                            </div><hr>
+
+                            {% endfor %}
+
+                            {% for label, messages in app.flashes(['success', 'warning']) %}
+                                {% for alert in messages  %}
+                                    <div class="alert alert-{{ label }} alert-dismissible fade show" role="alert">
+                                        <strong>
+                                            {%  if label == 'success' %}
+                                                Successful!
+                                            {% else %}
+                                                Failed!
+                                            {% endif %}
+                                        </strong> {{ alert }}
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <i class="ik ik-x"></i>
+                                        </button>
+                                    </div>
+                                {% endfor %}
+                            {% endfor %}
+                            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                            <div class="review-area">
+                                <h3>Let us know what you think about “{{ car.title }}”</h3>
+
+                                <div class="review-form">
+                                    {{ include('admin/comment/_form.html.twig', {'flag' : 1}) }}
+
+                                </div>
+                            </div>
+                                {% else %}
+                            <div class="review-area">
+                                <h3>In order to let us know what you think about “{{ car.title }}”, please <a href="/login">login</a></h3>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
